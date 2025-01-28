@@ -1,0 +1,49 @@
+trpe_model: Qwen2.5-14B-Instruct
+tr_model: Qwen2.5-14B-Instruct
+sft_model: Meta-Llama-3.1-8B-Instruct
+lang: en2fr
+
+##########################以下为基本无需修改的参数##########################
+
+# 术语识别PE调用本地模型还是线上服务
+trpe_mode: local # online or local
+
+# 本地推理服务部署相关参数
+port: 60001
+retry_num: 3
+
+# 音频切分相关参数
+as_data_path: /data3/yezang/SSData # 视频数据存放文件夹
+seg_num_workers: 8 # 音频切分时使用的线程数
+merge_audio_path: false
+
+# 字幕分片相关参数
+evaluation_mode: false # 决定生成分片对照结果还是测试集的字幕文件，前者为true，后者为false
+step: 25 # 每个prompt中的台词数量为step + 2 * context_len
+context_len: 5
+threshold_limit: 0.7 # 双语字幕对齐时字幕时间的最大间隔（单位：秒）
+sampling_ratio: 0.05 # 用来DPO采样的比例
+
+# 专有名词相关参数
+filter_threshold: 3 # 专有名词过滤阈值
+
+# 模型训练相关参数
+model_path: /data2/yezang/Models
+gpus: 0,1,2,3,4,5,6,7 # 训练和推理时CUDA_VISIBLE_DEVICES的参数
+sft_global_batch_size: 96
+sft_lr: 1.0e-6
+sft_epochs: 4
+tr_global_batch_size: 96
+tr_lr: 1.0e-6
+tr_epochs: 4
+
+# 质量评估模块相关参数
+evaluate_num: 50
+evaluate_models: deepseek-v3,claude35sonnet,gpt4o # qwen2.5-72b-instruct, qwen-max-0428, deepseek-v3, gpt3.5, gpt4o, claude35sonnet
+evaluate_dimensions: acc,nat,vivi
+
+# 说话人识别相关参数
+tau_t: 0.4 # 正阈值
+tau_b: 0.2 # 负阈值
+w: 0.8 # 概率权重
+std_pe_model: deepseek-v3 # qwen2.5-72b-instruct, qwen-max-0428, deepseek-v3

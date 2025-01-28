@@ -1,0 +1,16 @@
+construct_dataset_pseudo:
+  emb_path_prefix: /path
+  high_threshold: 0.45
+  low_threshold: 0.3
+emb_classification_infer:
+  infer_path_prefix: /path
+emb_classification_train:
+  have_test_data: true
+  train_data_percentage: 1.0
+pe_infer:
+  infer_batch_size: 32
+  infer_prompt_flag: ab
+  infer_seg_span: 30
+  std_pe_model: deepseek-v3
+weighted_fusion:
+  w: 1.0
