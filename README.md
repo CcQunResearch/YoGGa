@@ -1,4 +1,4 @@
-# FDCO
+# YoGGa
 
 Source code for YoGGa in paper: 
 
