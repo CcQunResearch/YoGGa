@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 
 def chat(txt, model):
-    headers = {'Authorization': 'Bearer sk-CxYl8ajQrZUDHLTU4aE74cDaC1734d1eB5EaE2A5226f8777',
+    headers = {'Authorization': 'api_key',
                'Content-Type': 'application/json'}
 
     q = {"messages": [{"content": txt, "role": "user"}], "model": model}
